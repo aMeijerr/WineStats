@@ -14,9 +14,6 @@ export class ChartsComponent implements OnInit, OnChanges {
 
   public chart: any;
 
-  queryParam = new BehaviorSubject<string>('Vin');
-  country = new BehaviorSubject<string>('Frankrike');
-
   constructor() {}
 
   ngOnInit() {

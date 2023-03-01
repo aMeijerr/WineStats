@@ -1,9 +1,41 @@
-<form [formGroup]="countrySelect" (change)="onChange()">
-  <select formControlName="country" (change)="changeCountry($event)">
+<form [formGroup]="countrySelect">
+  <label for="selectedCountry">Select country: </label>
+  <select
+    [(ngModel)]="currentCountry"
+    formControlName="selectedCountry"
+    id="selectedCountry"
+  >
     <option *ngFor="let country of countries" [value]="country">
       {{ country }}
     </option>
   </select>
 </form>
+
+<form [formGroup]="regionSelect" *ngIf="currentCountry">
+  <label for="selectedRegion">Select region: </label>
+  <select
+    [(ngModel)]="currentRegion"
+    formControlName="selectedRegion"
+    id="selectedRegion"
+  >
+    <option *ngFor="let region of regions[currentCountry]">
+      {{ region }}
+    </option>
+    <!-- <option *ngFor="let k of regionKeys(regions)">
+      <div *ngIf="k == currentCountry">
+        <div *ngFor="let region of regions[k]">
+          {{ region }}
+        </div>
+      </div>
+    </option> -->
+  </select>
+</form>
+
+<div>
+  <h1>
+    Total försäljningsvolym: {{ currentCountry }}
+    <h2 *ngIf="currentRegion">{{ currentRegion }}</h2>
+  </h1>
+</div>
 
 <app-charts [chartData]="chartData$ | async"></app-charts>

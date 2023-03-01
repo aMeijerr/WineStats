@@ -11,19 +11,25 @@ export interface IChartData {
   providedIn: 'root',
 })
 export class ApiService {
-  // private apiUrl = 'http://localhost:3000/country';
-  country$ = new BehaviorSubject<string>('USA');
-
   constructor(private http: HttpClient) {}
 
-  private buildUrl(): string {
+  private buildCountryUrl(
+    selectedCountry: string,
+    selectedRegion?: string
+  ): string {
     const baseUrl = 'http://localhost:3000/country';
-    const queryParams = new HttpParams().set('country', this.country$.value);
+    let queryParams = new HttpParams().set('country', selectedCountry);
+    if (selectedRegion) {
+      queryParams = queryParams.set('region', selectedRegion);
+    }
     return `${baseUrl}?${queryParams.toString()}`;
   }
 
-  getData(): Observable<IChartData[]> {
-    const url = this.buildUrl();
+  getData(
+    selectedCountry: string,
+    selectedRegion?: string
+  ): Observable<IChartData[]> {
+    const url = this.buildCountryUrl(selectedCountry, selectedRegion);
     return this.http.get(url).pipe(map((response: any) => response));
   }
 }
