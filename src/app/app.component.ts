@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { combineLatest, Observable, switchMap } from 'rxjs';
 import { ApiService } from './services/api.service';
 import { IChartData } from './services/api.service';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +19,7 @@ export class AppComponent implements OnInit {
     'USA',
   ];
 
+  //Kör python och skapa en json fil med data??
   regions: any = {
     Italien: ['Toscana', 'Piemonte', 'Sicilien', 'Umbrien'],
     Frankrike: [
@@ -35,50 +36,35 @@ export class AppComponent implements OnInit {
     Tyskland: ['Pfalz', 'Mosel', 'Rheingau', 'Baden'],
   };
 
+  //Setup form
+  form!: FormGroup;
+
+  //Define current selected option in dropdown
   currentCountry!: string;
-  countrySelect!: FormGroup;
-
   currentRegion!: string;
-  regionSelect!: FormGroup;
 
+  //Define chart data
   chartData$!: Observable<IChartData[]>;
 
   constructor(private apiService: ApiService, private fb: FormBuilder) {}
 
   ngOnInit() {
-    this.countrySelect = this.fb.group({
+    this.form = this.fb.group({
       selectedCountry: '',
-    });
-
-    this.regionSelect = this.fb.group({
       selectedRegion: '',
     });
 
+    this.form.get('selectedCountry')?.valueChanges.subscribe(() => {
+      this.form.get('selectedRegion')?.setValue('');
+    });
+
     this.chartData$ = combineLatest([
-      this.countrySelect.controls['selectedCountry'].valueChanges,
-      this.regionSelect.controls['selectedRegion'].valueChanges,
+      this.form.controls['selectedCountry'].valueChanges,
+      this.form.controls['selectedRegion'].valueChanges,
     ]).pipe(
       switchMap(([country, region]) => {
         return this.apiService.getData(country, region);
       })
     );
-
-    // this.chartData$ = this.countrySelect.controls[
-    //   'selectedCountry'
-    // ].valueChanges.pipe(
-    //   switchMap((country: string) => {
-    //     // let region = this.countrySelect.controls['selectedRegion'].value;
-    //     // return this.currentRegion
-    //     //   ? this.apiService.getData(country)
-    //     //   : this.apiService.getData(country, this.currentRegion);
-    //     return this.apiService.getData(country, this.currentRegion);
-    //   })
-    // );
-
-    // this.chartData$ = this.regionSelect.controls[
-    //   'selectedRegion'
-    // ].valueChanges.pipe(
-    //   switchMap((region: string) => this.apiService.getData(region))
-    // );
   }
 }
