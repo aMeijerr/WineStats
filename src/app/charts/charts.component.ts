@@ -1,62 +1,46 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { Chart } from 'chart.js/auto';
-import { BehaviorSubject, map } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
+import { IChartData } from '../services/api.service';
 
 @Component({
   selector: 'app-charts',
   templateUrl: './charts.component.html',
   styleUrls: ['./charts.component.scss'],
 })
-export class ChartsComponent implements OnInit {
+export class ChartsComponent implements OnInit, OnChanges {
+  @Input('chartData') chartData!: IChartData[] | null;
+
   public chart: any;
+
   queryParam = new BehaviorSubject<string>('Vin');
   country = new BehaviorSubject<string>('Frankrike');
 
-  constructor(private http: HttpClient) {}
+  constructor() {}
 
-  ngOnInit(): void {
-    this.fetchData();
+  ngOnInit() {
     this.createChart();
+    this.updateChart();
   }
 
-  // private buildDynamicUrl(param: string): string {
-  //   const baseUrl = `http://localhost:3000/${param}`;
-  //   const queryParams = new HttpParams().set(
-  //     param,
-  //     this.queryParam.value
-  //   );
-  //   return `${baseUrl}?${queryParams.toString()}`;
-  // }
-
-  private buildUrl(): string {
-    const baseUrl = 'http://localhost:3000/data';
-    const queryParams = new HttpParams().set(
-      'queryParam',
-      this.queryParam.value
-    );
-    return `${baseUrl}?${queryParams.toString()}`;
+  ngOnChanges() {
+    this.updateChart();
   }
 
-  private buildCountryUrl(): string {
-    const baseUrl = 'http://localhost:3000/country';
-    const queryParams = new HttpParams().set('country', this.country.value);
-    return `${baseUrl}?${queryParams.toString()}`;
-  }
+  updateChart() {
+    if (!this.chartData) {
+      return;
+    }
 
-  fetchData() {
-    const url = this.buildCountryUrl();
-    this.http.get(url).subscribe((response: any) => {
-      console.log(response);
-      this.chart.data.labels = response.map((res: any) => {
-        return res.date;
-      }, []);
+    this.chart.data.labels = this.chartData.map((res: any) => {
+      return res.date;
+    }, []);
 
-      this.chart.data.datasets[0].data = response.map((res: any) => {
-        return res.total_sales;
-      }, []);
-      this.chart.update();
-    });
+    this.chart.data.datasets[0].data = this.chartData.map((res: any) => {
+      return res.total_sales;
+    }, []);
+    this.chart.update();
   }
 
   createChart() {
@@ -83,7 +67,3 @@ export class ChartsComponent implements OnInit {
     });
   }
 }
-
-// this.http.get('http://localhost:3000/data').subscribe((response: any) => {
-//   this.data = response.data;
-// });

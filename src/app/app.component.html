@@ -1,1 +1,9 @@
-<app-charts></app-charts>
+<form [formGroup]="countrySelect" (change)="onChange()">
+  <select formControlName="country" (change)="changeCountry($event)">
+    <option *ngFor="let country of countries" [value]="country">
+      {{ country }}
+    </option>
+  </select>
+</form>
+
+<app-charts [chartData]="chartData$ | async"></app-charts>
