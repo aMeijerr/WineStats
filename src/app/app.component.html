@@ -1,11 +1,5 @@
 <div class="wrapper">
-  <nav class="navbar">
-    <h2>Systembolaget säljstatistik</h2>
-    <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-      <mat-button-toggle value="land">Land</mat-button-toggle>
-      <mat-button-toggle value="kategori">Kategori</mat-button-toggle>
-    </mat-button-toggle-group>
-  </nav>
+  <app-navbar (toggleChartType)="changeToggleValue($event)"></app-navbar>
 
   <section class="select-forms">
     <form [formGroup]="form">
@@ -16,21 +10,17 @@
           formControlName="selectedCountry"
           id="selectedCountry"
         >
-          <mat-option value="">All countries</mat-option>
+          <mat-option value="">Alla länder</mat-option>
           <mat-option *ngFor="let country of countries" [value]="country">
             {{ country }}
           </mat-option>
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field *ngIf="currentCountry">
+      <mat-form-field *ngIf="selectedToggleValue === 'region'">
         <mat-label for="selectedRegion">Välj region: </mat-label>
-        <mat-select
-          [(ngModel)]="currentRegion"
-          formControlName="selectedRegion"
-          id="selectedRegion"
-        >
-          <mat-option value="">All regions</mat-option>
+        <mat-select formControlName="selectedRegion" id="selectedRegion">
+          <mat-option value="">Alla regioner</mat-option>
           <mat-option
             *ngFor="let region of regions[currentCountry]"
             [value]="region"
@@ -39,56 +29,22 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
+
+      <mat-form-field *ngIf="selectedToggleValue === 'kategori'">
+        <mat-label for="selectedCategory">Välj kategori: </mat-label>
+        <mat-select formControlName="selectedCategory" id="selectedCategory">
+          <mat-option value="">Alla kategorier</mat-option>
+          <mat-option [value]="'Vin'">Vin</mat-option>
+          <mat-option [value]="'Sprit'">Sprit</mat-option>
+        </mat-select>
+      </mat-form-field>
     </form>
+    <!-- <button *ngIf="currentCountry" (click)="resetData()">reset</button> -->
   </section>
 
-  <!-- <div>
-    <h1>
-      Total försäljningsvolym: {{ currentCountry }}
-      <h2 *ngIf="currentRegion">{{ currentRegion }}</h2>
-    </h1>
-  </div> -->
   <div class="outbox">
     <div class="container">
       <app-charts [chartData]="chartData$ | async"></app-charts>
     </div>
   </div>
 </div>
-
-<!-- <div class="wrapper">
-  <form [formGroup]="form">
-    <label for="selectedCountry">Select country: </label>
-    <select
-      [(ngModel)]="currentCountry"
-      formControlName="selectedCountry"
-      id="selectedCountry"
-    >
-      <option value="">All countries</option>
-      <option *ngFor="let country of countries" [value]="country">
-        {{ country }}
-      </option>
-    </select>
-
-    <label *ngIf="currentCountry" for="selectedRegion">Select region: </label>
-    <select
-      [(ngModel)]="currentRegion"
-      *ngIf="currentCountry"
-      formControlName="selectedRegion"
-      id="selectedRegion"
-    >
-      <option value="">All regions</option>
-      <option *ngFor="let region of regions[currentCountry]">
-        {{ region }}
-      </option>
-    </select>
-  </form>
-
-  <div>
-    <h1>
-      Total försäljningsvolym: {{ currentCountry }}
-      <h2 *ngIf="currentRegion">{{ currentRegion }}</h2>
-    </h1>
-  </div>
-
-  <app-charts [chartData]="chartData$ | async"></app-charts>
-</div> -->

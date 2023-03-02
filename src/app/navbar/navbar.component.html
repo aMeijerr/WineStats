@@ -1,1 +1,7 @@
-<p>navbar works!</p>
+<nav class="navbar">
+  <h2>Systembolaget säljstatistik</h2>
+  <mat-button-toggle-group (change)="toggleChartType.emit($event.value)">
+    <mat-button-toggle value="region">Region</mat-button-toggle>
+    <mat-button-toggle value="kategori">Kategori</mat-button-toggle>
+  </mat-button-toggle-group>
+</nav>
