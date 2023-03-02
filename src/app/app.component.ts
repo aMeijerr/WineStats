@@ -4,6 +4,12 @@ import { ApiService } from './services/api.service';
 import { IChartData } from './services/api.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
+export interface IChartInputData {
+  country: string;
+  region: string;
+  category: string;
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -50,36 +56,33 @@ export class AppComponent implements OnInit {
 
   changeToggleValue(value: string) {
     this.selectedToggleValue = value;
-    this.form.get('selectedRegion')?.setValue('');
-    this.form.get('selectedCategory')?.setValue('');
+    this.form.patchValue({ region: '', category: '' });
+    // this.form.get('region')?.setValue('', { emitEvent: false });
+    // this.form.get('category')?.setValue('');
   }
 
   // resetData() {
-  //   this.form.get('selectedCountry')?.setValue('');
-  //   this.form.get('selectedRegion')?.setValue('');
-  //   this.form.get('selectedCategory')?.setValue('');
+  //   this.form.get('country')?.setValue('');
+  //   this.form.get('region')?.setValue('');
+  //   this.form.get('category')?.setValue('');
   // }
 
   constructor(private apiService: ApiService, private fb: FormBuilder) {}
 
   ngOnInit() {
     this.form = this.fb.group({
-      selectedCountry: [''],
-      selectedRegion: [''],
-      selectedCategory: [''],
+      country: [''],
+      region: [''],
+      category: [''],
     });
 
-    this.form.get('selectedCountry')?.valueChanges.subscribe(() => {
-      this.form.get('selectedRegion')?.setValue('');
-      this.form.get('selectedCategory')?.setValue('');
+    this.form.get('country')?.valueChanges.subscribe(() => {
+      this.form.get('region')?.setValue('');
+      this.form.get('category')?.setValue('');
     });
 
-    this.chartData$ = combineLatest([
-      this.form.controls['selectedCountry'].valueChanges,
-      this.form.controls['selectedRegion'].valueChanges,
-      this.form.controls['selectedCategory'].valueChanges,
-    ]).pipe(
-      switchMap(([country, region, category]) => {
+    this.chartData$ = this.form.valueChanges.pipe(
+      switchMap(({ country, region, category }) => {
         return this.apiService.getData(country, region, category);
       })
     );

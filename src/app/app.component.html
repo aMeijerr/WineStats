@@ -4,11 +4,11 @@
   <section class="select-forms">
     <form [formGroup]="form">
       <mat-form-field>
-        <mat-label for="selectedCountry">Välj land: </mat-label>
+        <mat-label for="country">Välj land: </mat-label>
         <mat-select
           [(ngModel)]="currentCountry"
-          formControlName="selectedCountry"
-          id="selectedCountry"
+          formControlName="country"
+          id="country"
         >
           <mat-option value="">Alla länder</mat-option>
           <mat-option *ngFor="let country of countries" [value]="country">
@@ -18,8 +18,8 @@
       </mat-form-field>
 
       <mat-form-field *ngIf="selectedToggleValue === 'region'">
-        <mat-label for="selectedRegion">Välj region: </mat-label>
-        <mat-select formControlName="selectedRegion" id="selectedRegion">
+        <mat-label for="region">Välj region: </mat-label>
+        <mat-select formControlName="region" id="region">
           <mat-option value="">Alla regioner</mat-option>
           <mat-option
             *ngFor="let region of regions[currentCountry]"
@@ -31,8 +31,8 @@
       </mat-form-field>
 
       <mat-form-field *ngIf="selectedToggleValue === 'kategori'">
-        <mat-label for="selectedCategory">Välj kategori: </mat-label>
-        <mat-select formControlName="selectedCategory" id="selectedCategory">
+        <mat-label for="category">Välj kategori: </mat-label>
+        <mat-select formControlName="category" id="category">
           <mat-option value="">Alla kategorier</mat-option>
           <mat-option [value]="'Vin'">Vin</mat-option>
           <mat-option [value]="'Sprit'">Sprit</mat-option>
