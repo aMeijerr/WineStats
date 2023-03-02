@@ -1,35 +1,94 @@
-<form [formGroup]="form">
-  <label for="selectedCountry">Select country: </label>
-  <select
-    [(ngModel)]="currentCountry"
-    formControlName="selectedCountry"
-    id="selectedCountry"
-  >
-    <option value="">All countries</option>
-    <option *ngFor="let country of countries" [value]="country">
-      {{ country }}
-    </option>
-  </select>
+<div class="wrapper">
+  <nav class="navbar">
+    <h2>Systembolaget säljstatistik</h2>
+    <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+      <mat-button-toggle value="land">Land</mat-button-toggle>
+      <mat-button-toggle value="kategori">Kategori</mat-button-toggle>
+    </mat-button-toggle-group>
+  </nav>
 
-  <label for="selectedRegion">Select region: </label>
-  <select
-    [(ngModel)]="currentRegion"
-    *ngIf="currentCountry"
-    formControlName="selectedRegion"
-    id="selectedRegion"
-  >
-    <option value="">All regions</option>
-    <option *ngFor="let region of regions[currentCountry]">
-      {{ region }}
-    </option>
-  </select>
-</form>
+  <section class="select-forms">
+    <form [formGroup]="form">
+      <mat-form-field>
+        <mat-label for="selectedCountry">Välj land: </mat-label>
+        <mat-select
+          [(ngModel)]="currentCountry"
+          formControlName="selectedCountry"
+          id="selectedCountry"
+        >
+          <mat-option value="">All countries</mat-option>
+          <mat-option *ngFor="let country of countries" [value]="country">
+            {{ country }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-<div>
-  <h1>
-    Total försäljningsvolym: {{ currentCountry }}
-    <h2 *ngIf="currentRegion">{{ currentRegion }}</h2>
-  </h1>
+      <mat-form-field *ngIf="currentCountry">
+        <mat-label for="selectedRegion">Välj region: </mat-label>
+        <mat-select
+          [(ngModel)]="currentRegion"
+          formControlName="selectedRegion"
+          id="selectedRegion"
+        >
+          <mat-option value="">All regions</mat-option>
+          <mat-option
+            *ngFor="let region of regions[currentCountry]"
+            [value]="region"
+          >
+            {{ region }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </section>
+
+  <!-- <div>
+    <h1>
+      Total försäljningsvolym: {{ currentCountry }}
+      <h2 *ngIf="currentRegion">{{ currentRegion }}</h2>
+    </h1>
+  </div> -->
+  <div class="outbox">
+    <div class="container">
+      <app-charts [chartData]="chartData$ | async"></app-charts>
+    </div>
+  </div>
 </div>
 
-<app-charts [chartData]="chartData$ | async"></app-charts>
+<!-- <div class="wrapper">
+  <form [formGroup]="form">
+    <label for="selectedCountry">Select country: </label>
+    <select
+      [(ngModel)]="currentCountry"
+      formControlName="selectedCountry"
+      id="selectedCountry"
+    >
+      <option value="">All countries</option>
+      <option *ngFor="let country of countries" [value]="country">
+        {{ country }}
+      </option>
+    </select>
+
+    <label *ngIf="currentCountry" for="selectedRegion">Select region: </label>
+    <select
+      [(ngModel)]="currentRegion"
+      *ngIf="currentCountry"
+      formControlName="selectedRegion"
+      id="selectedRegion"
+    >
+      <option value="">All regions</option>
+      <option *ngFor="let region of regions[currentCountry]">
+        {{ region }}
+      </option>
+    </select>
+  </form>
+
+  <div>
+    <h1>
+      Total försäljningsvolym: {{ currentCountry }}
+      <h2 *ngIf="currentRegion">{{ currentRegion }}</h2>
+    </h1>
+  </div>
+
+  <app-charts [chartData]="chartData$ | async"></app-charts>
+</div> -->

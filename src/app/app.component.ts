@@ -50,8 +50,8 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
-      selectedCountry: '',
-      selectedRegion: '',
+      selectedCountry: [''],
+      selectedRegion: [''],
     });
 
     this.form.get('selectedCountry')?.valueChanges.subscribe(() => {
