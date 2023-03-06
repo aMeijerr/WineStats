@@ -1,8 +1,9 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
-import { combineLatest, Observable, switchMap } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Observable, switchMap } from 'rxjs';
 import { ApiService } from './services/api.service';
 import { IChartData } from './services/api.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import countries from './services/countries.json';
 
 export interface IChartInputData {
   country: string;
@@ -16,32 +17,7 @@ export interface IChartInputData {
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  countries: any = [
-    'Italien',
-    'Frankrike',
-    'Spanien',
-    'Tyskland',
-    'Ungern',
-    'USA',
-    'Chile',
-  ];
-
-  //Kör python och skapa en json fil med data??
-  regions: any = {
-    Italien: ['Toscana', 'Piemonte', 'Sicilien', 'Umbrien'],
-    Frankrike: [
-      'Bordeaux',
-      'Bourgogne',
-      'Provence',
-      'Champagne',
-      'Cognac',
-      'Rhonedalen',
-      'Alsace',
-    ],
-    Spanien: ['Rioja', 'Penedès', 'Priorat', 'Jerez', 'Valencia'],
-    USA: ['Kalifornien', 'Oregon'],
-    Tyskland: ['Pfalz', 'Mosel', 'Rheingau', 'Baden'],
-  };
+  // countries = Object.entries(data).map(([country, regions]) => ({ country, regions }));
 
   //Setup form
   form!: FormGroup;
@@ -49,10 +25,23 @@ export class AppComponent implements OnInit {
   selectedToggleValue = '';
 
   //Define current selected option in dropdown
+  countries: { [key: string]: string[] } = countries;
   currentCountry!: string;
+  filteredRegions!: string[];
 
   //Define chart data
   chartData$!: Observable<IChartData[]>;
+
+  onCountrySelect() {
+    const country = this.currentCountry;
+    // this.currentCountry = country;
+    if (country) {
+      this.filteredRegions = this.countries[country];
+      console.log(this.filteredRegions);
+    } else {
+      this.filteredRegions = [];
+    }
+  }
 
   changeToggleValue(value: string) {
     this.selectedToggleValue = value;
