@@ -21,24 +21,31 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field *ngIf="selectedToggleValue === 'region'">
-        <mat-label for="region">Välj region: </mat-label>
-        <mat-select formControlName="region" id="region">
-          <mat-option value="">Alla regioner</mat-option>
-          <mat-option *ngFor="let region of filteredRegions" [value]="region">
-            {{ region }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+      <div class="select-options">
+        <mat-form-field *ngIf="selectedToggleValue === 'region'">
+          <mat-label for="region">Välj region: </mat-label>
+          <mat-select formControlName="region" id="region">
+            <mat-option value="">Alla regioner</mat-option>
+            <mat-option *ngFor="let region of filteredRegions" [value]="region">
+              {{ region }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
 
-      <mat-form-field *ngIf="selectedToggleValue === 'kategori'">
-        <mat-label for="category">Välj kategori: </mat-label>
-        <mat-select formControlName="category" id="category">
-          <mat-option value="">Alla kategorier</mat-option>
-          <mat-option [value]="'Vin'">Vin</mat-option>
-          <mat-option [value]="'Sprit'">Sprit</mat-option>
-        </mat-select>
-      </mat-form-field>
+        <mat-button-toggle-group
+          name="category"
+          aria-label="category"
+          *ngIf="selectedToggleValue === 'kategori'"
+          formControlName="category"
+          id="category"
+        >
+          <mat-button-toggle [value]="'Vin'">Vin</mat-button-toggle>
+          <mat-button-toggle [value]="'Sprit'">Sprit</mat-button-toggle>
+          <mat-button-toggle [value]="'Öl, Cider och Blanddryck'"
+            >Öl, Cider och Blanddryck</mat-button-toggle
+          >
+        </mat-button-toggle-group>
+      </div>
     </form>
     <!-- <button *ngIf="currentCountry" (click)="resetData()">reset</button> -->
   </section>

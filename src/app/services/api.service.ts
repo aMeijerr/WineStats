@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 export interface IChartData {
   date: number;
@@ -23,7 +23,7 @@ export class ApiService {
     if (selectedRegion) {
       queryParams = queryParams.set('region', selectedRegion);
     }
-    if (selectedCategory) {
+    if (selectedCategory && selectedCategory.length > 0) {
       queryParams = queryParams.set('category', selectedCategory);
     }
     return `${baseUrl}?${queryParams.toString()}`;

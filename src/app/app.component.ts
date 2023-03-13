@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, switchMap } from 'rxjs';
 import { ApiService } from './services/api.service';
 import { IChartData } from './services/api.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import countries from './services/countries.json';
 
 export interface IChartInputData {
@@ -17,10 +17,10 @@ export interface IChartInputData {
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  // countries = Object.entries(data).map(([country, regions]) => ({ country, regions }));
-
   //Setup form
   form!: FormGroup;
+
+  categoryControl = new FormControl([]);
 
   selectedToggleValue = '';
 
@@ -34,10 +34,8 @@ export class AppComponent implements OnInit {
 
   onCountrySelect() {
     const country = this.currentCountry;
-    // this.currentCountry = country;
     if (country) {
       this.filteredRegions = this.countries[country];
-      console.log(this.filteredRegions);
     } else {
       this.filteredRegions = [];
     }
@@ -47,14 +45,7 @@ export class AppComponent implements OnInit {
     this.selectedToggleValue = value;
     this.form.patchValue({ region: '', category: '' });
     // this.form.get('region')?.setValue('', { emitEvent: false });
-    // this.form.get('category')?.setValue('');
   }
-
-  // resetData() {
-  //   this.form.get('country')?.setValue('');
-  //   this.form.get('region')?.setValue('');
-  //   this.form.get('category')?.setValue('');
-  // }
 
   constructor(private apiService: ApiService, private fb: FormBuilder) {}
 
@@ -69,6 +60,12 @@ export class AppComponent implements OnInit {
       this.form.get('region')?.setValue('');
       this.form.get('category')?.setValue('');
     });
+
+    this.categoryControl.valueChanges.subscribe(
+      (selectedCategories: string[] | null) => {
+        this.form.get('category')?.setValue(selectedCategories);
+      }
+    );
 
     this.chartData$ = this.form.valueChanges.pipe(
       switchMap(({ country, region, category }) => {

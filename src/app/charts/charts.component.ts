@@ -1,7 +1,5 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { Chart } from 'chart.js/auto';
-import { BehaviorSubject } from 'rxjs';
 import { IChartData } from '../services/api.service';
 
 @Component({
