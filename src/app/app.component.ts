@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { Observable, switchMap } from 'rxjs';
 import { ApiService } from './services/api.service';
 import { IChartData } from './services/api.service';
@@ -7,6 +7,8 @@ import countries from './services/countries.json';
 
 export interface IChartInputData {
   country: string;
+  minYear: number;
+  maxYear: number;
   region: string;
   category: string;
 }
@@ -32,6 +34,15 @@ export class AppComponent implements OnInit {
   //Define chart data
   chartData$!: Observable<IChartData[]>;
 
+  //Set year range of chart
+  minYear: number = 2009;
+  maxYear: number = 2021;
+
+  checkSelectedYears() {
+    console.log(this.minYear);
+    console.log(this.maxYear);
+  }
+
   onCountrySelect() {
     const country = this.currentCountry;
     if (country) {
@@ -54,11 +65,15 @@ export class AppComponent implements OnInit {
       country: [''],
       region: [''],
       category: [''],
+      minYear: [this.minYear],
+      maxYear: [this.maxYear],
     });
 
     this.form.get('country')?.valueChanges.subscribe(() => {
       this.form.get('region')?.setValue('');
       this.form.get('category')?.setValue('');
+      this.form.get('minYear')?.setValue(this.minYear);
+      this.form.get('maxYear')?.setValue(this.maxYear);
     });
 
     this.categoryControl.valueChanges.subscribe(
@@ -68,8 +83,14 @@ export class AppComponent implements OnInit {
     );
 
     this.chartData$ = this.form.valueChanges.pipe(
-      switchMap(({ country, region, category }) => {
-        return this.apiService.getData(country, region, category);
+      switchMap(({ country, minYear, maxYear, region, category }) => {
+        return this.apiService.getData(
+          country,
+          minYear,
+          maxYear,
+          region,
+          category
+        );
       })
     );
   }

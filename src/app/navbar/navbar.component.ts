@@ -7,4 +7,6 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class NavbarComponent {
   @Output() toggleChartType = new EventEmitter<string>();
+
+  toggleSettings() {}
 }

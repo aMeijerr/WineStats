@@ -11,6 +11,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { NavbarComponent } from './navbar/navbar.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSliderModule } from '@angular/material/slider';
 
 @NgModule({
   declarations: [AppComponent, ChartsComponent, NavbarComponent],
@@ -23,6 +25,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     BrowserAnimationsModule,
     MatSelectModule,
     MatButtonToggleModule,
+    MatIconModule,
+    MatSliderModule,
   ],
   providers: [ApiService],
   bootstrap: [AppComponent],

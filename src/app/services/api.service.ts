@@ -15,6 +15,8 @@ export class ApiService {
 
   private buildCountryUrl(
     selectedCountry: string,
+    minYear: Number,
+    maxYear: Number,
     selectedRegion?: string,
     selectedCategory?: string
   ): string {
@@ -26,16 +28,24 @@ export class ApiService {
     if (selectedCategory && selectedCategory.length > 0) {
       queryParams = queryParams.set('category', selectedCategory);
     }
+    if (minYear && maxYear) {
+      queryParams = queryParams.set('minYear', minYear.toString());
+      queryParams = queryParams.set('maxYear', maxYear.toString());
+    }
     return `${baseUrl}?${queryParams.toString()}`;
   }
 
   getData(
     selectedCountry: string,
+    minYear: Number,
+    maxYear: Number,
     selectedRegion?: string,
     selectedCategory?: string
   ): Observable<IChartData[]> {
     const url = this.buildCountryUrl(
       selectedCountry,
+      minYear,
+      maxYear,
       selectedRegion,
       selectedCategory
     );

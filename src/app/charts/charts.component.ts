@@ -57,7 +57,7 @@ export class ChartsComponent implements OnInit, OnChanges {
             ],
             borderColor: [
               'rgba(54, 162, 235, 1)',
-              //'rgba(255, 206, 86, 1)',
+              // 'rgba(255, 206, 86, 1)',
               // 'rgba(255,99,132,1)',
               // 'rgba(75, 192, 192, 1)',
               // 'rgba(153, 102, 255, 1)',
@@ -81,19 +81,19 @@ export class ChartsComponent implements OnInit, OnChanges {
         ],
       },
       options: {
+        responsive: true,
         aspectRatio: 2,
-        // scales: {
-        //   x: {
-        //     ticks: {
-        //       font: {
-        //         size: 14,
-        //         family: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
-        //         weight: 'bold',
-        //       },
-        //       color: 'black',
-        //     },
-        //   },
-        // },
+        scales: {
+          x: {
+            ticks: {
+              font: {
+                size: 10,
+                family: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+              },
+              color: 'black',
+            },
+          },
+        },
       },
     });
   }

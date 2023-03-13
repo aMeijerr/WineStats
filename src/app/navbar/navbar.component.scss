@@ -3,7 +3,17 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    // background-color: #f5f5f5;
+}
+
+.nav-settings {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 1rem;
+}
+
+.settings-icon {
+    cursor: pointer;
 }
 
 h2 {
