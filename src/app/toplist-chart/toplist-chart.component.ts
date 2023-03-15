@@ -69,7 +69,7 @@ export class ToplistChartComponent implements OnInit, OnChanges {
               'rgba(153, 102, 255, 1)',
               'rgba(255, 159, 64, 1)',
             ],
-            borderWidth: 1,
+            borderWidth: 2,
           },
         ],
       },

@@ -67,11 +67,14 @@
 
   <div class="outbox">
     <div class="container">
+      <h2>Total sales by Country</h2>
       <app-charts [chartData]="chartData$ | async"></app-charts>
     </div>
-  </div>
-  <div class="outbox">
-    <div class="container"></div>
-    <app-toplist-chart [topListData]="topListData$ | async"></app-toplist-chart>
+    <div class="container">
+      <h2>Top 10 Producers</h2>
+      <app-toplist-chart
+        [topListData]="topListData$ | async"
+      ></app-toplist-chart>
+    </div>
   </div>
 </div>

@@ -5,6 +5,14 @@ html, body {
     font-family: 'Tinos', serif;
 }
 
+h2 {
+    font-size: 2rem;
+    margin: 5px;
+    font-family: 'Tinos', serif;
+    font-weight: 600;
+    border-bottom: 1px solid rgba(54, 162, 235, 1);
+}
+
 .wrapper {
     margin: 0;
     width: 100%;
@@ -23,13 +31,19 @@ html, body {
     margin: 1rem;
 }
 
-.outbox{
+.outbox {
     text-align: center;
   }
 
-.container{
+.container {
     width: 70%;
     display: inline-block;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    box-shadow: rgba(17, 12, 46, 0.15) 0px 18px 60px 0px;
+    padding: 20px;
+    margin: 10px;
   }
 
 mat-slider {
