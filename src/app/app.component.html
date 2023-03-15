@@ -1,13 +1,5 @@
 <div class="wrapper">
   <app-navbar (toggleChartType)="changeToggleValue($event)"></app-navbar>
-  <button (click)="checkSelectedYears()">Kolla rå</button>
-
-  <!-- <div class="year-slider">
-    <mat-slider min="2009" max="2021" step="1" showTickMarks discrete>
-      <input [(ngModel)]="minYear" matSliderStartThumb />
-      <input [(ngModel)]="maxYear" matSliderEndThumb />
-    </mat-slider>
-  </div> -->
 
   <section class="select-forms">
     <form [formGroup]="form">

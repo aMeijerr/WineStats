@@ -8,7 +8,7 @@ import { IChartData } from '../services/api.service';
   styleUrls: ['./charts.component.scss'],
 })
 export class ChartsComponent implements OnInit, OnChanges {
-  @Input('chartData') chartData!: IChartData[] | null;
+  @Input('chartData') chartData$!: IChartData[] | null;
 
   public chart: any;
 
@@ -24,15 +24,15 @@ export class ChartsComponent implements OnInit, OnChanges {
   }
 
   updateChart() {
-    if (!this.chartData) {
+    if (!this.chartData$) {
       return;
     }
 
-    this.chart.data.labels = this.chartData.map((res: any) => {
+    this.chart.data.labels = this.chartData$.map((res: any) => {
       return res.date;
     }, []);
 
-    this.chart.data.datasets[0].data = this.chartData.map((res: any) => {
+    this.chart.data.datasets[0].data = this.chartData$.map((res: any) => {
       return res.total_sales;
     }, []);
     this.chart.update();
