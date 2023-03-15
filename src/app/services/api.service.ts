@@ -35,6 +35,23 @@ export class ApiService {
     return `${baseUrl}?${queryParams.toString()}`;
   }
 
+  private buildTopListUrl(
+    minYear: Number,
+    maxYear: Number,
+    selectedCategory?: string
+  ): string {
+    const baseUrl = 'http://localhost:3000/top-list';
+    let queryParams = new HttpParams();
+    if (selectedCategory && selectedCategory.length > 0) {
+      queryParams = queryParams.set('category', selectedCategory);
+    }
+    if (minYear && maxYear) {
+      queryParams = queryParams.set('minYear', minYear.toString());
+      queryParams = queryParams.set('maxYear', maxYear.toString());
+    }
+    return `${baseUrl}?${queryParams.toString()}`;
+  }
+
   getData(
     selectedCountry: string,
     minYear: Number,
@@ -49,6 +66,15 @@ export class ApiService {
       selectedRegion,
       selectedCategory
     );
+    return this.http.get(url).pipe(map((response: any) => response));
+  }
+
+  getTopListData(
+    minYear: Number,
+    maxYear: Number,
+    selectedCategory?: string
+  ): Observable<IChartData[]> {
+    const url = this.buildTopListUrl(minYear, maxYear, selectedCategory);
     return this.http.get(url).pipe(map((response: any) => response));
   }
 }

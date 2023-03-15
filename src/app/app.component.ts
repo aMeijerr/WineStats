@@ -6,7 +6,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import countries from './services/countries.json';
 
 export interface IChartInputData {
-  country: string;
+  country?: string;
   minYear: number;
   maxYear: number;
   region: string;
@@ -33,6 +33,7 @@ export class AppComponent implements OnInit {
 
   //Define chart data
   chartData$!: Observable<IChartData[]>;
+  topListData$!: Observable<IChartData[]>;
 
   //Set year range of chart
   minYear: number = 2009;
@@ -91,6 +92,11 @@ export class AppComponent implements OnInit {
           region,
           category
         );
+      })
+    );
+    this.topListData$ = this.form.valueChanges.pipe(
+      switchMap(({ minYear, maxYear, category }) => {
+        return this.apiService.getTopListData(minYear, maxYear, category);
       })
     );
   }

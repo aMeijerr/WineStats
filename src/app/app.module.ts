@@ -13,9 +13,10 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSliderModule } from '@angular/material/slider';
+import { ToplistChartComponent } from './toplist-chart/toplist-chart.component';
 
 @NgModule({
-  declarations: [AppComponent, ChartsComponent, NavbarComponent],
+  declarations: [AppComponent, ChartsComponent, NavbarComponent, ToplistChartComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
