@@ -46,21 +46,19 @@
           >
         </mat-button-toggle-group>
       </div>
-      <div class="year-slider">
-        <p>Select year span:</p>
-        <mat-slider min="2009" max="2021" step="1" showTickMarks discrete>
-          <input
-            [(ngModel)]="minYear"
-            matSliderStartThumb
-            formControlName="minYear"
-          />
-          <input
-            [(ngModel)]="maxYear"
-            matSliderEndThumb
-            formControlName="maxYear"
-          />
-        </mat-slider>
-      </div>
+      <p>Select year span:</p>
+      <mat-slider min="2009" max="2021" step="1" showTickMarks discrete>
+        <input
+          [(ngModel)]="minYear"
+          matSliderStartThumb
+          formControlName="minYear"
+        />
+        <input
+          [(ngModel)]="maxYear"
+          matSliderEndThumb
+          formControlName="maxYear"
+        />
+      </mat-slider>
     </form>
     <!-- <button *ngIf="currentCountry" (click)="resetData()">reset</button> -->
   </section>

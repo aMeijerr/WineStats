@@ -1,15 +1,15 @@
 <nav class="navbar">
-  <h2>Systembolaget säljstatistik</h2>
   <section class="nav-settings">
+    <h2>Systembolaget säljstatistik</h2>
     <mat-button-toggle-group (change)="toggleChartType.emit($event.value)">
       <mat-button-toggle value="region">Region</mat-button-toggle>
       <mat-button-toggle value="kategori">Kategori</mat-button-toggle>
     </mat-button-toggle-group>
-    <mat-icon
+    <!-- <mat-icon
       aria-label="chart settings"
       fontIcon="settings"
       class="settings-icon"
       (click)="toggleSettings()"
-    ></mat-icon>
+    ></mat-icon> -->
   </section>
 </nav>
