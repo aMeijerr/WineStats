@@ -22,7 +22,7 @@ h2 {
 .select-forms {
     position: fixed;
     left: 0;
-    width: 250px;
+    width: 200px;
     border-right: 2px solid #ccc;
     height: 100vh;
     background-color: white;
@@ -37,10 +37,9 @@ h2 {
 .outbox {
     display: flex;
     flex-direction: column;
-    // justify-content: flex-end;
     align-items: flex-end;
     text-align: center;
-    padding: 4rem;
+    margin-right: 5rem;
   }
 
 .container {
@@ -56,11 +55,4 @@ h2 {
 
 mat-slider {
     min-width: 100%;
-}
-
-.year-slider {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
 }

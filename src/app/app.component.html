@@ -4,14 +4,14 @@
   <section class="select-forms">
     <form [formGroup]="form">
       <mat-form-field>
-        <mat-label for="country">Välj land: </mat-label>
+        <mat-label for="country">Choose country: </mat-label>
         <mat-select
           [(ngModel)]="currentCountry"
           (ngModelChange)="onCountrySelect()"
           formControlName="country"
           id="country"
         >
-          <mat-option value="">Alla länder</mat-option>
+          <mat-option value="">All countries</mat-option>
           <mat-option
             *ngFor="let country of countries | keyvalue"
             [value]="country.key"
@@ -23,28 +23,26 @@
 
       <div class="select-options">
         <mat-form-field *ngIf="selectedToggleValue === 'region'">
-          <mat-label for="region">Välj region: </mat-label>
+          <mat-label for="region">Choose region: </mat-label>
           <mat-select formControlName="region" id="region">
-            <mat-option value="">Alla regioner</mat-option>
+            <mat-option value="">All regions</mat-option>
             <mat-option *ngFor="let region of filteredRegions" [value]="region">
               {{ region }}
             </mat-option>
           </mat-select>
         </mat-form-field>
 
-        <mat-button-toggle-group
-          name="category"
-          aria-label="category"
-          *ngIf="selectedToggleValue === 'kategori'"
-          formControlName="category"
-          id="category"
-        >
-          <mat-button-toggle [value]="'Vin'">Vin</mat-button-toggle>
-          <mat-button-toggle [value]="'Sprit'">Sprit</mat-button-toggle>
-          <mat-button-toggle [value]="'Öl, Cider och Blanddryck'"
-            >Öl, Cider och Blanddryck</mat-button-toggle
-          >
-        </mat-button-toggle-group>
+        <mat-form-field *ngIf="selectedToggleValue === 'kategori'">
+          <mat-label for="region">Choose category: </mat-label>
+          <mat-select formControlName="category" id="category">
+            <mat-option value="">All categories</mat-option>
+            <mat-option value="Vin">Wine</mat-option>
+            <mat-option value="Sprit">Spirits</mat-option>
+            <mat-option value="Öl, Cider och Blanddryck"
+              >Beer & Cider</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
       </div>
       <p>Select year span:</p>
       <mat-slider min="2009" max="2021" step="1" showTickMarks discrete>
@@ -60,7 +58,6 @@
         />
       </mat-slider>
     </form>
-    <!-- <button *ngIf="currentCountry" (click)="resetData()">reset</button> -->
   </section>
 
   <div class="outbox">
@@ -69,7 +66,7 @@
       <app-charts [chartData]="chartData$ | async"></app-charts>
     </div>
     <div class="container">
-      <h2>Top 10 Producers</h2>
+      <h2>Top 10 producers by Category</h2>
       <app-toplist-chart
         [topListData]="topListData$ | async"
       ></app-toplist-chart>

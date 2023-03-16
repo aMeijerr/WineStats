@@ -56,7 +56,6 @@ export class AppComponent implements OnInit {
   changeToggleValue(value: string) {
     this.selectedToggleValue = value;
     this.form.patchValue({ region: '', category: '' });
-    // this.form.get('region')?.setValue('', { emitEvent: false });
   }
 
   constructor(private apiService: ApiService, private fb: FormBuilder) {}
