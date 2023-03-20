@@ -1,3 +1,4 @@
 export const environment = {
-    accessToken: 'ya29.a0AVvZVsrtGG4u0qO08voajrZLU696aC516eh_qL6AnZMZ6OnQOM4wasw3hnDCiJvBZMn_KHq9TnD4zklyU_5oJR-X0z1vGLS2cqHJXytn2BozKRDBWWYTj7zJlR4GFU8wKY52atnXJ6SwNqBa0q-RaL5qLvtSHDnq2ncPaCgYKAa8SAQASFQGbdwaIXciFbMLs3N7ul-onS2PVMQ0171'
-}
+  production: false,
+  API_BASE_URL: 'http://localhost:3000',
+};

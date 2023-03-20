@@ -21,7 +21,10 @@
     "useDefineForClassFields": false,
     "lib": [
       "ES2022",
-      "dom"
+      "dom",
+    ],
+    "types": [
+      "node"
     ],
     "resolveJsonModule": true,
     "esModuleInterop": true

@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
+import { environment } from 'src/environment/environment';
+
+const API_BASE_URL = environment.API_BASE_URL;
 
 export interface IChartData {
   date: number;
@@ -20,7 +23,7 @@ export class ApiService {
     selectedRegion?: string,
     selectedCategory?: string
   ): string {
-    const baseUrl = 'http://localhost:3000/country';
+    const baseUrl = `${API_BASE_URL}/country`;
     let queryParams = new HttpParams().set('country', selectedCountry);
     if (selectedRegion) {
       queryParams = queryParams.set('region', selectedRegion);
@@ -40,7 +43,7 @@ export class ApiService {
     maxYear: Number,
     selectedCategory?: string
   ): string {
-    const baseUrl = 'http://localhost:3000/top-list';
+    const baseUrl = `${API_BASE_URL}/toplist`;
     let queryParams = new HttpParams();
     if (selectedCategory && selectedCategory.length > 0) {
       queryParams = queryParams.set('category', selectedCategory);

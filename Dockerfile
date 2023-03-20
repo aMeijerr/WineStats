@@ -1,22 +1,21 @@
-FROM node:16-alpine
+FROM node:16-alpine As build
 
-# Set the working directory to /app
-WORKDIR /Wine-stats
+WORKDIR /usr/src/app
 
-# Copy the package.json and package-lock.json files to the working directory
-COPY package*.json ./
-
-# Install dependencies
-RUN npm install
-
-# Copy the rest of the application code to the working directory
 COPY . .
 
-# Build the Angular app
+RUN npm i
+
+# Run the build command which creates the production bundle
 RUN npm run build
 
-# Expose port 80 to allow external access
-EXPOSE 80
+# Set NODE_ENV environment variable
+ENV NODE_ENV production
 
-# Start the web server
-CMD [ "npm", "run", "start" ]
+FROM nginx:alpine
+
+COPY /nginx.conf /etc/nginx/conf.d/web.template
+COPY --from=build /usr/src/app/dist/wine-data /usr/share/nginx/html
+
+EXPOSE 8080
+CMD sh -c "envsubst '\$PORT' < /etc/nginx/conf.d/web.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
