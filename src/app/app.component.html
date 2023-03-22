@@ -22,7 +22,7 @@
       </mat-form-field>
 
       <div class="select-options">
-        <mat-form-field *ngIf="selectedToggleValue === 'region'">
+        <mat-form-field *ngIf="currentCountry">
           <mat-label for="region">Choose region: </mat-label>
           <mat-select formControlName="region" id="region">
             <mat-option value="">All regions</mat-option>
@@ -32,7 +32,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field *ngIf="selectedToggleValue === 'kategori'">
+        <mat-form-field>
           <mat-label for="region">Choose category: </mat-label>
           <mat-select formControlName="category" id="category">
             <mat-option value="">All categories</mat-option>
@@ -61,17 +61,17 @@
   </section>
 
   <div class="outbox">
-    <div class="container">
+    <div class="container" *ngIf="selectedToggleValue === 'countries'">
       <h2>Total sales by Country</h2>
       <app-charts [chartData]="chartData$ | async"></app-charts>
     </div>
-    <div class="container">
+    <div class="container" *ngIf="selectedToggleValue === 'producers'">
       <h2>Top 10 producers by Category</h2>
       <app-toplist-chart
         [topProducerListData]="topProducerListData$ | async"
       ></app-toplist-chart>
     </div>
-    <div class="container">
+    <div class="container" *ngIf="selectedToggleValue === 'products'">
       <h2>Top 10 products</h2>
       <app-product-chart
         [topProductListData]="topProductListData$ | async"

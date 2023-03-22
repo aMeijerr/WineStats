@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
 
   categoryControl = new FormControl([]);
 
-  selectedToggleValue = '';
+  selectedToggleValue = 'countries';
 
   //Define current selected option in dropdown
   countries: { [key: string]: string[] } = countries;
@@ -56,7 +56,7 @@ export class AppComponent implements OnInit {
 
   changeToggleValue(value: string) {
     this.selectedToggleValue = value;
-    this.form.patchValue({ region: '', category: '' });
+    this.form.patchValue({ country: '', region: '', category: '' });
   }
 
   constructor(private apiService: ApiService, private fb: FormBuilder) {}
