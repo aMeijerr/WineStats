@@ -24,7 +24,10 @@ export class ApiService {
     selectedCategory?: string
   ): string {
     const baseUrl = `${API_BASE_URL}/country`;
-    let queryParams = new HttpParams().set('country', selectedCountry);
+    let queryParams = new HttpParams();
+    if (selectedCountry) {
+      queryParams = queryParams.set('country', selectedCountry);
+    }
     if (selectedRegion) {
       queryParams = queryParams.set('region', selectedRegion);
     }
