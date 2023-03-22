@@ -1,5 +1,5 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
-import { Observable, switchMap } from 'rxjs';
+import { debounceTime, Observable, switchMap, tap } from 'rxjs';
 import { ApiService } from './services/api.service';
 import { IChartData } from './services/api.service';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
@@ -82,7 +82,10 @@ export class AppComponent implements OnInit {
       }
     );
 
+    //Add deBounceTime to prevent multiple requests
+
     this.chartData$ = this.form.valueChanges.pipe(
+      debounceTime(0),
       switchMap(({ country, minYear, maxYear, region, category }) => {
         return this.apiService.getData(
           country,
@@ -94,6 +97,7 @@ export class AppComponent implements OnInit {
       })
     );
     this.topListData$ = this.form.valueChanges.pipe(
+      debounceTime(0),
       switchMap(({ minYear, maxYear, category }) => {
         return this.apiService.getTopListData(minYear, maxYear, category);
       })
