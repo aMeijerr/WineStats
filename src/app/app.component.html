@@ -68,8 +68,14 @@
     <div class="container">
       <h2>Top 10 producers by Category</h2>
       <app-toplist-chart
-        [topListData]="topListData$ | async"
+        [topProducerListData]="topProducerListData$ | async"
       ></app-toplist-chart>
+    </div>
+    <div class="container">
+      <h2>Top 10 products</h2>
+      <app-product-chart
+        [topProductListData]="topProductListData$ | async"
+      ></app-product-chart>
     </div>
   </div>
 </div>

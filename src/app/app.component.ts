@@ -33,7 +33,8 @@ export class AppComponent implements OnInit {
 
   //Define chart data
   chartData$!: Observable<IChartData[]>;
-  topListData$!: Observable<IChartData[]>;
+  topProducerListData$!: Observable<IChartData[]>;
+  topProductListData$!: Observable<IChartData[]>;
 
   //Set year range of chart
   minYear: number = 2009;
@@ -96,10 +97,26 @@ export class AppComponent implements OnInit {
         );
       })
     );
-    this.topListData$ = this.form.valueChanges.pipe(
+    this.topProducerListData$ = this.form.valueChanges.pipe(
       debounceTime(0),
       switchMap(({ minYear, maxYear, category }) => {
-        return this.apiService.getTopListData(minYear, maxYear, category);
+        return this.apiService.getProducerTopListData(
+          minYear,
+          maxYear,
+          category
+        );
+      })
+    );
+    this.topProductListData$ = this.form.valueChanges.pipe(
+      debounceTime(0),
+      switchMap(({ country, minYear, maxYear, region, category }) => {
+        return this.apiService.getProductTopListData(
+          country,
+          minYear,
+          maxYear,
+          region,
+          category
+        );
       })
     );
   }

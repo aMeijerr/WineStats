@@ -8,7 +8,7 @@ import { IChartData } from '../services/api.service';
   styleUrls: ['./toplist-chart.component.scss'],
 })
 export class ToplistChartComponent implements OnInit, OnChanges {
-  @Input('topListData') topListData$?: IChartData[] | null;
+  @Input('topProducerListData') topProducerListData$?: IChartData[] | null;
 
   public toplistChart: any;
 
@@ -24,15 +24,18 @@ export class ToplistChartComponent implements OnInit, OnChanges {
   }
 
   updateChart() {
-    if (!this.topListData$) {
+    if (!this.topProducerListData$) {
       return;
     }
 
-    this.toplistChart.data.labels = this.topListData$.map((res: any) => {
-      return res.producer_name;
-    }, []);
+    this.toplistChart.data.labels = this.topProducerListData$.map(
+      (res: any) => {
+        return res.producer_name;
+      },
+      []
+    );
 
-    this.toplistChart.data.datasets[0].data = this.topListData$.map(
+    this.toplistChart.data.datasets[0].data = this.topProducerListData$.map(
       (res: any) => {
         return res.total_sales;
       },
