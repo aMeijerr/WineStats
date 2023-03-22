@@ -43,7 +43,7 @@ export class ApiService {
     maxYear: Number,
     selectedCategory?: string
   ): string {
-    const baseUrl = `${API_BASE_URL}/toplist`;
+    const baseUrl = `${API_BASE_URL}/top-list`;
     let queryParams = new HttpParams();
     if (selectedCategory && selectedCategory.length > 0) {
       queryParams = queryParams.set('category', selectedCategory);
