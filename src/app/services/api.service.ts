@@ -41,12 +41,12 @@ export class ApiService {
     return `${baseUrl}?${queryParams.toString()}`;
   }
 
-  private buildTopListUrl(
+  private buildProducerTopListUrl(
     minYear: Number,
     maxYear: Number,
     selectedCategory?: string
   ): string {
-    const baseUrl = `${API_BASE_URL}/toplist`;
+    const baseUrl = `${API_BASE_URL}/producerToplist`;
     let queryParams = new HttpParams();
     if (selectedCategory && selectedCategory.length > 0) {
       queryParams = queryParams.set('category', selectedCategory);
@@ -80,7 +80,11 @@ export class ApiService {
     maxYear: Number,
     selectedCategory?: string
   ): Observable<IChartData[]> {
-    const url = this.buildTopListUrl(minYear, maxYear, selectedCategory);
+    const url = this.buildProducerTopListUrl(
+      minYear,
+      maxYear,
+      selectedCategory
+    );
     return this.http.get(url).pipe(map((response: any) => response));
   }
 }
