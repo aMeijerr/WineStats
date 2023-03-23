@@ -11,6 +11,7 @@ export class ChartsComponent implements OnInit, OnChanges {
   @Input('chartData') chartData$!: IChartData[] | null;
 
   public chart: any;
+  public isLoading = true;
 
   constructor() {}
 
@@ -25,6 +26,7 @@ export class ChartsComponent implements OnInit, OnChanges {
 
   updateChart() {
     if (!this.chartData$) {
+      this.isLoading = true;
       return;
     }
 
@@ -37,6 +39,8 @@ export class ChartsComponent implements OnInit, OnChanges {
     }, []);
 
     this.chart.update();
+
+    this.isLoading = false;
   }
 
   createChart() {

@@ -11,6 +11,7 @@ export class ProductChartComponent implements OnInit, OnChanges {
   @Input('topProductListData') topProductListData$?: IChartData[] | null;
 
   public productChart: any;
+  public isLoading = true;
 
   constructor() {}
 
@@ -25,6 +26,7 @@ export class ProductChartComponent implements OnInit, OnChanges {
 
   updateChart() {
     if (!this.topProductListData$) {
+      this.isLoading = true;
       return;
     }
 
@@ -41,6 +43,8 @@ export class ProductChartComponent implements OnInit, OnChanges {
     );
 
     this.productChart.update();
+
+    this.isLoading = false;
   }
 
   createTopProductListChart() {

@@ -14,6 +14,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ToplistChartComponent } from './toplist-chart/toplist-chart.component';
 import { ProductChartComponent } from './product-chart/product-chart.component';
 
@@ -37,6 +38,7 @@ import { ProductChartComponent } from './product-chart/product-chart.component';
     MatIconModule,
     MatSliderModule,
     MatTabsModule,
+    MatProgressBarModule,
   ],
   providers: [ApiService],
   bootstrap: [AppComponent],

@@ -11,6 +11,7 @@ export class ToplistChartComponent implements OnInit, OnChanges {
   @Input('topProducerListData') topProducerListData$?: IChartData[] | null;
 
   public toplistChart: any;
+  public isLoading = true;
 
   constructor() {}
 
@@ -25,6 +26,7 @@ export class ToplistChartComponent implements OnInit, OnChanges {
 
   updateChart() {
     if (!this.topProducerListData$) {
+      this.isLoading = true;
       return;
     }
 
@@ -43,6 +45,8 @@ export class ToplistChartComponent implements OnInit, OnChanges {
     );
 
     this.toplistChart.update();
+
+    this.isLoading = false;
   }
 
   createTopListChart() {
