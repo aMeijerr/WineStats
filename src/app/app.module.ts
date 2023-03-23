@@ -13,11 +13,18 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatTabsModule } from '@angular/material/tabs';
 import { ToplistChartComponent } from './toplist-chart/toplist-chart.component';
 import { ProductChartComponent } from './product-chart/product-chart.component';
 
 @NgModule({
-  declarations: [AppComponent, ChartsComponent, NavbarComponent, ToplistChartComponent, ProductChartComponent],
+  declarations: [
+    AppComponent,
+    ChartsComponent,
+    NavbarComponent,
+    ToplistChartComponent,
+    ProductChartComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -29,6 +36,7 @@ import { ProductChartComponent } from './product-chart/product-chart.component';
     MatButtonToggleModule,
     MatIconModule,
     MatSliderModule,
+    MatTabsModule,
   ],
   providers: [ApiService],
   bootstrap: [AppComponent],

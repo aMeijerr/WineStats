@@ -42,12 +42,20 @@ export class ApiService {
   }
 
   private buildProducerTopListUrl(
+    selectedCountry: string,
     minYear: Number,
     maxYear: Number,
+    selectedRegion?: string,
     selectedCategory?: string
   ): string {
     const baseUrl = `${API_BASE_URL}/producerToplist`;
     let queryParams = new HttpParams();
+    if (selectedCountry) {
+      queryParams = queryParams.set('country', selectedCountry);
+    }
+    if (selectedRegion) {
+      queryParams = queryParams.set('region', selectedRegion);
+    }
     if (selectedCategory && selectedCategory.length > 0) {
       queryParams = queryParams.set('category', selectedCategory);
     }
@@ -118,13 +126,17 @@ export class ApiService {
   }
 
   getProducerTopListData(
+    selectedCountry: string,
     minYear: Number,
     maxYear: Number,
+    selectedRegion?: string,
     selectedCategory?: string
   ): Observable<IChartData[]> {
     const url = this.buildProducerTopListUrl(
+      selectedCountry,
       minYear,
       maxYear,
+      selectedRegion,
       selectedCategory
     );
     return this.http.get(url).pipe(map((response: any) => response));

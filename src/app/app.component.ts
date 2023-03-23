@@ -99,10 +99,12 @@ export class AppComponent implements OnInit {
     );
     this.topProducerListData$ = this.form.valueChanges.pipe(
       debounceTime(0),
-      switchMap(({ minYear, maxYear, category }) => {
+      switchMap(({ country, minYear, maxYear, region, category }) => {
         return this.apiService.getProducerTopListData(
+          country,
           minYear,
           maxYear,
+          region,
           category
         );
       })
