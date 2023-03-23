@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ChartsComponent } from './charts/charts.component';
+import { SalesChartComponent } from './charts/sales-chart/sales-chart.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ApiService } from './services/api.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -15,13 +15,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { ToplistChartComponent } from './toplist-chart/toplist-chart.component';
-import { ProductChartComponent } from './product-chart/product-chart.component';
+import { ToplistChartComponent } from './charts/toplist-chart/toplist-chart.component';
+import { ProductChartComponent } from './charts/product-chart/product-chart.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ChartsComponent,
+    SalesChartComponent,
     NavbarComponent,
     ToplistChartComponent,
     ProductChartComponent,

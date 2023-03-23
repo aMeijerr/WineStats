@@ -1,22 +1,22 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { Chart } from 'chart.js/auto';
-import { IChartData } from '../services/api.service';
+import { IChartData } from '../../services/api.service';
 
 @Component({
-  selector: 'app-toplist-chart',
-  templateUrl: './toplist-chart.component.html',
-  styleUrls: ['./toplist-chart.component.scss'],
+  selector: 'app-product-chart',
+  templateUrl: './product-chart.component.html',
+  styleUrls: ['./product-chart.component.scss'],
 })
-export class ToplistChartComponent implements OnInit, OnChanges {
-  @Input('topProducerListData') topProducerListData$?: IChartData[] | null;
+export class ProductChartComponent implements OnInit, OnChanges {
+  @Input('topProductListData') topProductListData$?: IChartData[] | null;
 
-  public toplistChart: any;
+  public productChart: any;
   public isLoading = true;
 
   constructor() {}
 
   ngOnInit() {
-    this.createTopListChart();
+    this.createTopProductListChart();
     this.updateChart();
   }
 
@@ -25,32 +25,30 @@ export class ToplistChartComponent implements OnInit, OnChanges {
   }
 
   updateChart() {
-    if (!this.topProducerListData$) {
+    if (!this.topProductListData$) {
       this.isLoading = true;
       return;
     }
 
-    this.toplistChart.data.labels = this.topProducerListData$.map(
-      (res: any) => {
-        return res.producer_name;
-      },
-      []
-    );
+    this.productChart.data.labels = this.topProductListData$.map((res: any) => {
+      console.log(res);
+      return res.name;
+    }, []);
 
-    this.toplistChart.data.datasets[0].data = this.topProducerListData$.map(
+    this.productChart.data.datasets[0].data = this.topProductListData$.map(
       (res: any) => {
         return res.total_sales;
       },
       []
     );
 
-    this.toplistChart.update();
+    this.productChart.update();
 
     this.isLoading = false;
   }
 
-  createTopListChart() {
-    this.toplistChart = new Chart('toplistChart', {
+  createTopProductListChart() {
+    this.productChart = new Chart('productChart', {
       type: 'doughnut',
       data: {
         //Country / Leverantör beroende på mest antal top 10?

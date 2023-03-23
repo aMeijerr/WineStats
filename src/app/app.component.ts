@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
   filteredRegions!: string[];
 
   //Define chart data
-  chartData$!: Observable<IChartData[]>;
+  salesChartData$!: Observable<IChartData[]>;
   topProducerListData$!: Observable<IChartData[]>;
   topProductListData$!: Observable<IChartData[]>;
 
@@ -85,7 +85,7 @@ export class AppComponent implements OnInit {
 
     //Add deBounceTime to prevent multiple requests
 
-    this.chartData$ = this.form.valueChanges.pipe(
+    this.salesChartData$ = this.form.valueChanges.pipe(
       debounceTime(0),
       switchMap(({ country, minYear, maxYear, region, category }) => {
         return this.apiService.getData(

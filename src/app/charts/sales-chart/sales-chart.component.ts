@@ -1,14 +1,14 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { Chart } from 'chart.js/auto';
-import { IChartData } from '../services/api.service';
+import { IChartData } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-charts',
-  templateUrl: './charts.component.html',
-  styleUrls: ['./charts.component.scss'],
+  templateUrl: './sales-chart.component.html',
+  styleUrls: ['./sales-chart.component.scss'],
 })
-export class ChartsComponent implements OnInit, OnChanges {
-  @Input('chartData') chartData$!: IChartData[] | null;
+export class SalesChartComponent implements OnInit, OnChanges {
+  @Input('salesChartData') salesChartData$!: IChartData[] | null;
 
   public chart: any;
   public isLoading = true;
@@ -25,16 +25,16 @@ export class ChartsComponent implements OnInit, OnChanges {
   }
 
   updateChart() {
-    if (!this.chartData$) {
+    if (!this.salesChartData$) {
       this.isLoading = true;
       return;
     }
 
-    this.chart.data.labels = this.chartData$.map((res: any) => {
+    this.chart.data.labels = this.salesChartData$.map((res: any) => {
       return res.date;
     }, []);
 
-    this.chart.data.datasets[0].data = this.chartData$.map((res: any) => {
+    this.chart.data.datasets[0].data = this.salesChartData$.map((res: any) => {
       return res.total_sales;
     }, []);
 
@@ -44,7 +44,7 @@ export class ChartsComponent implements OnInit, OnChanges {
   }
 
   createChart() {
-    this.chart = new Chart('MyChart', {
+    this.chart = new Chart('salesChart', {
       type: 'line',
       data: {
         labels: [],
