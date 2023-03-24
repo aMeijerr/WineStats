@@ -11,6 +11,7 @@ export class ProducerChartComponent implements OnInit, OnChanges {
   @Input('topProducerListData') topProducerListData$?: IChartData[] | null;
 
   public producerChart: any;
+  public producerSalesChart: any;
   public isLoading = true;
 
   constructor() {}
@@ -44,13 +45,26 @@ export class ProducerChartComponent implements OnInit, OnChanges {
       []
     );
 
+    this.producerSalesChart.data.labels = this.topProducerListData$.map(
+      (res: any) => {
+        return res.producer_name;
+      },
+      []
+    );
+
+    this.producerSalesChart.data.datasets[0].data =
+      this.topProducerListData$.map((res: any) => {
+        return res.total_sales;
+      }, []);
+
     this.producerChart.update();
+    this.producerSalesChart.update();
 
     this.isLoading = false;
   }
 
   createProducerChart() {
-    this.producerChart = new Chart('toplistChart', {
+    this.producerChart = new Chart('producerChart', {
       type: 'doughnut',
       data: {
         //Country / Leverantör beroende på mest antal top 10?
@@ -83,6 +97,43 @@ export class ProducerChartComponent implements OnInit, OnChanges {
       options: {
         responsive: true,
         aspectRatio: 2,
+      },
+    });
+    this.producerSalesChart = new Chart('producerSalesChart', {
+      type: 'line',
+      data: {
+        labels: [],
+        datasets: [
+          {
+            label: 'Sales in litres',
+            data: [],
+            backgroundColor: ['rgba(75, 192, 192, 0.2)'],
+            borderColor: ['rgba(54, 162, 235, 1)'],
+            fill: {
+              target: 'origin',
+            },
+            tension: 0.3,
+            pointStyle: 'rectRounded',
+            pointRadius: 8,
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        aspectRatio: 2,
+        scales: {
+          x: {
+            ticks: {
+              font: {
+                size: 12,
+                family:
+                  "'Tinos', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+              },
+              color: 'black',
+            },
+          },
+        },
       },
     });
   }
