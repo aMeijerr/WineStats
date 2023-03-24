@@ -6,6 +6,7 @@ import { environment } from 'src/environment/environment';
 const API_BASE_URL = environment.API_BASE_URL;
 
 export interface IChartData {
+  name: string;
   date: number;
   total_sales: number;
 }

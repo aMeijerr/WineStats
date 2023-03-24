@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
   //Setup form
   form!: FormGroup;
 
-  categoryControl = new FormControl([]);
+  categoryControl = new FormControl('');
 
   selectedToggleValue = 'countries';
 
@@ -78,7 +78,7 @@ export class AppComponent implements OnInit {
     });
 
     this.categoryControl.valueChanges.subscribe(
-      (selectedCategories: string[] | null) => {
+      (selectedCategories: string | null) => {
         this.form.get('category')?.setValue(selectedCategories);
       }
     );
