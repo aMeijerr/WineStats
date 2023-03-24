@@ -11,6 +11,7 @@ export class ProductChartComponent implements OnInit, OnChanges {
   @Input('topProductListData') topProductListData$?: IChartData[] | null;
 
   public productChart: any;
+  public productSalesChart: any;
   public isLoading = true;
 
   constructor() {}
@@ -42,7 +43,23 @@ export class ProductChartComponent implements OnInit, OnChanges {
       []
     );
 
+    this.productSalesChart.data.labels = this.topProductListData$.map(
+      (res: any) => {
+        console.log(res);
+        return res.name;
+      },
+      []
+    );
+
+    this.productSalesChart.data.datasets[0].data = this.topProductListData$.map(
+      (res: any) => {
+        return res.total_sales;
+      },
+      []
+    );
+
     this.productChart.update();
+    this.productSalesChart.update();
 
     this.isLoading = false;
   }
@@ -81,6 +98,43 @@ export class ProductChartComponent implements OnInit, OnChanges {
       options: {
         responsive: true,
         aspectRatio: 2,
+      },
+    });
+    this.productSalesChart = new Chart('productSalesChart', {
+      type: 'line',
+      data: {
+        labels: [],
+        datasets: [
+          {
+            label: 'Sales in litres',
+            data: [],
+            backgroundColor: ['rgba(75, 192, 192, 0.2)'],
+            borderColor: ['rgba(54, 162, 235, 1)'],
+            fill: {
+              target: 'origin',
+            },
+            tension: 0.3,
+            pointStyle: 'rectRounded',
+            pointRadius: 8,
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        aspectRatio: 2,
+        scales: {
+          x: {
+            ticks: {
+              font: {
+                size: 12,
+                family:
+                  "'Tinos', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+              },
+              color: 'black',
+            },
+          },
+        },
       },
     });
   }
