@@ -3,7 +3,7 @@ import { Chart } from 'chart.js/auto';
 import { IChartData } from '../../services/api.service';
 
 @Component({
-  selector: 'app-toplist-chart',
+  selector: 'app-producer-chart',
   templateUrl: './producer-chart.component.html',
   styleUrls: ['./producer-chart.component.scss'],
 })
