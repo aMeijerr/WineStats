@@ -15,7 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { ToplistChartComponent } from './charts/toplist-chart/toplist-chart.component';
+import { ProducerChartComponent } from './charts/producer-chart/producer-chart.component';
 import { ProductChartComponent } from './charts/product-chart/product-chart.component';
 
 @NgModule({
@@ -23,7 +23,7 @@ import { ProductChartComponent } from './charts/product-chart/product-chart.comp
     AppComponent,
     SalesChartComponent,
     NavbarComponent,
-    ToplistChartComponent,
+    ProducerChartComponent,
     ProductChartComponent,
   ],
   imports: [

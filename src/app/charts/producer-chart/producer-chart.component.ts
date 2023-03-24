@@ -4,19 +4,19 @@ import { IChartData } from '../../services/api.service';
 
 @Component({
   selector: 'app-toplist-chart',
-  templateUrl: './toplist-chart.component.html',
-  styleUrls: ['./toplist-chart.component.scss'],
+  templateUrl: './producer-chart.component.html',
+  styleUrls: ['./producer-chart.component.scss'],
 })
-export class ToplistChartComponent implements OnInit, OnChanges {
+export class ProducerChartComponent implements OnInit, OnChanges {
   @Input('topProducerListData') topProducerListData$?: IChartData[] | null;
 
-  public toplistChart: any;
+  public producerChart: any;
   public isLoading = true;
 
   constructor() {}
 
   ngOnInit() {
-    this.createTopListChart();
+    this.createProducerChart();
     this.updateChart();
   }
 
@@ -30,27 +30,27 @@ export class ToplistChartComponent implements OnInit, OnChanges {
       return;
     }
 
-    this.toplistChart.data.labels = this.topProducerListData$.map(
+    this.producerChart.data.labels = this.topProducerListData$.map(
       (res: any) => {
         return res.producer_name;
       },
       []
     );
 
-    this.toplistChart.data.datasets[0].data = this.topProducerListData$.map(
+    this.producerChart.data.datasets[0].data = this.topProducerListData$.map(
       (res: any) => {
         return res.total_sales;
       },
       []
     );
 
-    this.toplistChart.update();
+    this.producerChart.update();
 
     this.isLoading = false;
   }
 
-  createTopListChart() {
-    this.toplistChart = new Chart('toplistChart', {
+  createProducerChart() {
+    this.producerChart = new Chart('toplistChart', {
       type: 'doughnut',
       data: {
         //Country / Leverantör beroende på mest antal top 10?
