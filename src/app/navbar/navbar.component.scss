@@ -8,6 +8,13 @@
     z-index: 999;
 }
 
+.title_logo {
+    display: flex;
+    flex-direction: row;
+    // align-items: center;
+    // justify-content: center;
+}
+
 .nav-settings {
     display: flex;
     justify-content: space-between;
@@ -16,7 +23,11 @@
 h2 {
     font-size: 1.8rem;
     font-family: 'Tinos', serif;
-    font-weight: 600;
+    // text-align: center;
+    // vertical-align: center;
+    // font-weight: 600;
+    // align-items: center;
+    margin-left: 10px;
     border-bottom: 1px solid rgba(54, 162, 235, 1);
 }
 
