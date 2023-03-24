@@ -17,14 +17,14 @@ export interface IChartData {
 export class ApiService {
   constructor(private http: HttpClient) {}
 
-  private buildCountryUrl(
+  private buildSalesUrl(
     selectedCountry: string,
     minYear: Number,
     maxYear: Number,
     selectedRegion?: string,
     selectedCategory?: string
   ): string {
-    const baseUrl = `${API_BASE_URL}/country`;
+    const baseUrl = `${API_BASE_URL}/sales`;
     let queryParams = new HttpParams();
     if (selectedCountry) {
       queryParams = queryParams.set('country', selectedCountry);
@@ -99,7 +99,7 @@ export class ApiService {
     selectedRegion?: string,
     selectedCategory?: string
   ): Observable<IChartData[]> {
-    const url = this.buildCountryUrl(
+    const url = this.buildSalesUrl(
       selectedCountry,
       minYear,
       maxYear,
