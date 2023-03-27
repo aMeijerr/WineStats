@@ -38,7 +38,6 @@ export class ProductChartComponent implements OnInit, OnChanges {
     // }
 
     this.productChart.data.labels = this.topProductListData$.map((res: any) => {
-      console.log(res);
       return res.name;
     }, []);
 
