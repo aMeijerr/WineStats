@@ -63,6 +63,9 @@ mat-slider {
 }
 
 @media (max-width: 700px) {
+    .wrapper {
+        overflow: hidden;
+    }
     .mobile_message {
         display: flex;
         flex-direction: column;
