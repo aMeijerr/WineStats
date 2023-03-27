@@ -46,7 +46,7 @@ h2 {
 .container {
     width: 70%;
     display: inline-block;
-    align-items: center;
+    // align-items: center;
     border: 1px solid #ccc;
     border-radius: 0.5rem;
     box-shadow: rgba(17, 12, 46, 0.15) 0px 18px 60px 0px;
@@ -54,6 +54,45 @@ h2 {
     margin: 10px;
   }
 
+.mobile_message {
+    display: none;
+}
+
 mat-slider {
     min-width: 100%;
+}
+
+@media (max-width: 700px) {
+    .mobile_message {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .select-forms {
+        margin: auto;
+        position: sticky;
+        max-height: 240px;
+        width: fit-content;
+        border: none;
+        align-items: center;
+    }
+    mat-slider {
+        display: inline-block;
+    }
+    .outbox {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+        width: 100%;
+    }
+    .container {
+        width: 80%;
+        max-height: 220px;
+    }
+    .container h2 {
+        font-size: 1.5rem;
+    }
 }
