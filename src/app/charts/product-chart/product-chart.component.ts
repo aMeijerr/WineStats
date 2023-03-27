@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { Chart, ChartTypeRegistry } from 'chart.js/auto';
+import { Chart } from 'chart.js/auto';
 import { IChartData } from '../../services/api.service';
 
 @Component({
@@ -51,7 +51,6 @@ export class ProductChartComponent implements OnInit, OnChanges {
 
     this.productSalesChart.data.labels = this.topProductListData$.map(
       (res: any) => {
-        console.log(res);
         return res.name;
       },
       []
