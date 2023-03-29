@@ -3,15 +3,15 @@ import { Chart } from 'chart.js/auto';
 import { IChartData } from '../../services/api.service';
 
 @Component({
-  selector: 'app-product-group-chart',
-  templateUrl: './product-group-chart.component.html',
-  styleUrls: ['./product-group-chart.component.scss'],
+  selector: 'app-category-chart',
+  templateUrl: './category-chart.component.html',
+  styleUrls: ['./category-chart.component.scss'],
 })
-export class ProductGroupChartComponent implements OnInit, OnChanges {
-  @Input('productGroupListData') productGroupListData$?: IChartData[] | null;
+export class CategoryChartComponent implements OnInit, OnChanges {
+  @Input('topCategoryListData') topCategoryListData$?: IChartData[] | null;
 
-  public productGroupChart: any;
-  public productGroupSalesChart: any;
+  public topCategoryChart: any;
+  public topCategorySalesChart: any;
   public isLoading = true;
 
   // chartType: keyof ChartTypeRegistry = 'line';
@@ -19,7 +19,7 @@ export class ProductGroupChartComponent implements OnInit, OnChanges {
   constructor() {}
 
   ngOnInit() {
-    this.createProductGroupListChart();
+    this.createCategoryTopListChart();
     this.updateChart();
   }
 
@@ -28,7 +28,7 @@ export class ProductGroupChartComponent implements OnInit, OnChanges {
   }
 
   updateChart() {
-    if (!this.productGroupListData$) {
+    if (!this.topCategoryListData$) {
       this.isLoading = true;
       return;
     }
@@ -37,39 +37,40 @@ export class ProductGroupChartComponent implements OnInit, OnChanges {
     //   this.chartType = 'line';
     // }
 
-    this.productGroupChart.data.labels = this.productGroupListData$.map(
-      (res: any) => {
-        console.log(res);
-        return res.product_group_detail;
-      },
-      []
-    );
-
-    this.productGroupChart.data.datasets[0].data =
-      this.productGroupListData$.map((res: any) => {
-        return res.total_sales;
-      }, []);
-
-    this.productGroupSalesChart.data.labels = this.productGroupListData$.map(
+    this.topCategoryChart.data.labels = this.topCategoryListData$.map(
       (res: any) => {
         return res.product_group_detail;
       },
       []
     );
 
-    this.productGroupSalesChart.data.datasets[0].data =
-      this.productGroupListData$.map((res: any) => {
+    this.topCategoryChart.data.datasets[0].data = this.topCategoryListData$.map(
+      (res: any) => {
+        return res.total_sales;
+      },
+      []
+    );
+
+    this.topCategorySalesChart.data.labels = this.topCategoryListData$.map(
+      (res: any) => {
+        return res.product_group_detail;
+      },
+      []
+    );
+
+    this.topCategorySalesChart.data.datasets[0].data =
+      this.topCategoryListData$.map((res: any) => {
         return res.total_sales;
       }, []);
 
-    this.productGroupChart.update();
-    this.productGroupSalesChart.update();
+    this.topCategoryChart.update();
+    this.topCategorySalesChart.update();
 
     this.isLoading = false;
   }
 
-  createProductGroupListChart() {
-    this.productGroupChart = new Chart('productGroupChart', {
+  createCategoryTopListChart() {
+    this.topCategoryChart = new Chart('topCategoryChart', {
       type: 'doughnut',
       data: {
         //Country / Leverantör beroende på mest antal top 10?
@@ -97,7 +98,7 @@ export class ProductGroupChartComponent implements OnInit, OnChanges {
         aspectRatio: 2,
       },
     });
-    this.productGroupSalesChart = new Chart('productGroupSalesChart', {
+    this.topCategorySalesChart = new Chart('topCategorySalesChart', {
       type: 'bar',
       data: {
         labels: [],

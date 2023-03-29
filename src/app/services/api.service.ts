@@ -118,14 +118,14 @@ export class ApiService {
     return `${baseUrl}?${queryParams.toString()}`;
   }
 
-  private buildProductGroupListUrl(
+  private buildCategoryTopListUrl(
     selectedCountry: string,
     minYear: Number,
     maxYear: Number,
     selectedRegion?: string,
     selectedCategory?: string
   ): string {
-    const baseUrl = `${API_BASE_URL}/productGrouplist`;
+    const baseUrl = `${API_BASE_URL}/categoryToplist`;
     let queryParams = new HttpParams();
     if (selectedCountry) {
       queryParams = queryParams.set('country', selectedCountry);
@@ -211,14 +211,14 @@ export class ApiService {
     return this.http.get(url).pipe(map((response: any) => response));
   }
 
-  getProductGroupListData(
+  getCategoryTopListData(
     selectedCountry: string,
     minYear: Number,
     maxYear: Number,
     selectedRegion?: string,
     selectedCategory?: string
   ): Observable<IChartData[]> {
-    const url = this.buildProductGroupListUrl(
+    const url = this.buildCategoryTopListUrl(
       selectedCountry,
       minYear,
       maxYear,

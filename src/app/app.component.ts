@@ -36,7 +36,7 @@ export class AppComponent implements OnInit {
   topProducerListData$!: Observable<IChartData[]>;
   topProductListData$!: Observable<IChartData[]>;
   topCountryListData$!: Observable<IChartData[]>;
-  productGroupListData$!: Observable<IChartData[]>;
+  topCategoryListData$!: Observable<IChartData[]>;
 
   //Set year range of chart
   minYear: number = 2009;
@@ -135,10 +135,10 @@ export class AppComponent implements OnInit {
         );
       })
     );
-    this.productGroupListData$ = this.form.valueChanges.pipe(
+    this.topCategoryListData$ = this.form.valueChanges.pipe(
       debounceTime(0),
       switchMap(({ country, minYear, maxYear, region, category }) => {
-        return this.apiService.getProductGroupListData(
+        return this.apiService.getCategoryTopListData(
           country,
           minYear,
           maxYear,

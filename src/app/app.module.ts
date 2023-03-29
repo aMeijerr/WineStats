@@ -17,8 +17,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ProducerChartComponent } from './charts/producer-chart/producer-chart.component';
 import { ProductChartComponent } from './charts/product-chart/product-chart.component';
-import { ProductGroupChartComponent } from './charts/product-group-chart/product-group-chart.component';
 import { CountryChartComponent } from './charts/country-chart/country-chart.component';
+import { CategoryChartComponent } from './charts/category-chart/category-chart.component';
 
 @NgModule({
   declarations: [
@@ -27,8 +27,8 @@ import { CountryChartComponent } from './charts/country-chart/country-chart.comp
     NavbarComponent,
     ProducerChartComponent,
     ProductChartComponent,
-    ProductGroupChartComponent,
     CountryChartComponent,
+    CategoryChartComponent,
   ],
   imports: [
     BrowserModule,
