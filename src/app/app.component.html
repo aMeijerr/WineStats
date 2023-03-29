@@ -81,5 +81,11 @@
         [topProductListData]="topProductListData$ | async"
       ></app-product-chart>
     </div>
+    <div class="container" *ngIf="selectedToggleValue === 'product_group'">
+      <h2>Top 10 product groups</h2>
+      <app-product-group-chart
+        [productGroupListData]="productGroupListData$ | async"
+      ></app-product-group-chart>
+    </div>
   </div>
 </div>

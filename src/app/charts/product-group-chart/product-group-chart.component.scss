@@ -1,0 +1,14 @@
+.product_chart-container {
+    // height: 65vh;
+    margin-bottom: 2rem;
+}
+
+hr {
+    border: 1.5px solid rgba(54, 162, 235, 1);
+}
+
+@media (max-width: 700px) {
+    .extra_chart {
+        display: none;
+    }
+}
