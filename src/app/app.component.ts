@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
 
   categoryControl = new FormControl('');
 
-  selectedToggleValue = 'countries';
+  selectedToggleValue = 'sales';
 
   //Define current selected option in dropdown
   countries: { [key: string]: string[] } = countries;
@@ -35,6 +35,7 @@ export class AppComponent implements OnInit {
   salesChartData$!: Observable<IChartData[]>;
   topProducerListData$!: Observable<IChartData[]>;
   topProductListData$!: Observable<IChartData[]>;
+  topCountryListData$!: Observable<IChartData[]>;
   productGroupListData$!: Observable<IChartData[]>;
 
   //Set year range of chart
@@ -89,7 +90,7 @@ export class AppComponent implements OnInit {
     this.salesChartData$ = this.form.valueChanges.pipe(
       debounceTime(0),
       switchMap(({ country, minYear, maxYear, region, category }) => {
-        return this.apiService.getData(
+        return this.apiService.getSalesData(
           country,
           minYear,
           maxYear,
@@ -114,6 +115,18 @@ export class AppComponent implements OnInit {
       debounceTime(0),
       switchMap(({ country, minYear, maxYear, region, category }) => {
         return this.apiService.getProductTopListData(
+          country,
+          minYear,
+          maxYear,
+          region,
+          category
+        );
+      })
+    );
+    this.topCountryListData$ = this.form.valueChanges.pipe(
+      debounceTime(0),
+      switchMap(({ country, minYear, maxYear, region, category }) => {
+        return this.apiService.getCountryTopListData(
           country,
           minYear,
           maxYear,

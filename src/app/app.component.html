@@ -7,7 +7,7 @@
 
   <section class="select-forms">
     <form [formGroup]="form">
-      <mat-form-field>
+      <mat-form-field *ngIf="selectedToggleValue != 'countries'">
         <mat-label for="country">Choose country: </mat-label>
         <mat-select
           [(ngModel)]="currentCountry"
@@ -65,8 +65,8 @@
   </section>
 
   <div class="outbox">
-    <div class="container" *ngIf="selectedToggleValue === 'countries'">
-      <h2>Total sales by Country</h2>
+    <div class="container" *ngIf="selectedToggleValue === 'sales'">
+      <h2>Total sales</h2>
       <app-charts [salesChartData]="salesChartData$ | async"></app-charts>
     </div>
     <div class="container" *ngIf="selectedToggleValue === 'producers'">
@@ -86,6 +86,12 @@
       <app-product-group-chart
         [productGroupListData]="productGroupListData$ | async"
       ></app-product-group-chart>
+    </div>
+    <div class="container" *ngIf="selectedToggleValue === 'countries'">
+      <h2>Top 10 countries</h2>
+      <app-country-chart
+        [topCountryListData]="topCountryListData$ | async"
+      ></app-country-chart>
     </div>
   </div>
 </div>

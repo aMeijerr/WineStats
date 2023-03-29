@@ -6,8 +6,9 @@
     </div>
     <mat-button-toggle-group
       (change)="toggleChartType.emit($event.value)"
-      value="countries"
+      value="sales"
     >
+      <mat-button-toggle value="sales">Sales</mat-button-toggle>
       <mat-button-toggle value="countries">Countries</mat-button-toggle>
       <mat-button-toggle value="producers">Producers</mat-button-toggle>
       <mat-button-toggle value="products">Products</mat-button-toggle>
