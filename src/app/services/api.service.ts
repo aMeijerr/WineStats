@@ -7,6 +7,7 @@ const API_BASE_URL = environment.API_BASE_URL;
 
 export interface IChartData {
   name: string;
+  product_group_details: string;
   date: number;
   total_sales: number;
 }
