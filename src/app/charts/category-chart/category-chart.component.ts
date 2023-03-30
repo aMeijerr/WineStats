@@ -14,8 +14,6 @@ export class CategoryChartComponent implements OnInit, OnChanges {
   public topCategorySalesChart: any;
   public isLoading = true;
 
-  // chartType: keyof ChartTypeRegistry = 'line';
-
   constructor() {}
 
   ngOnInit() {
@@ -73,11 +71,9 @@ export class CategoryChartComponent implements OnInit, OnChanges {
     this.topCategoryChart = new Chart('topCategoryChart', {
       type: 'doughnut',
       data: {
-        //Country / Leverantör beroende på mest antal top 10?
         labels: [],
         datasets: [
           {
-            //Number of sales top 10?
             data: [],
             backgroundColor: [
               'rgba(255, 99, 132, 1)',
@@ -121,49 +117,7 @@ export class CategoryChartComponent implements OnInit, OnChanges {
             borderWidth: 2,
           },
         },
-        plugins: {
-          // legend: {
-          //   position: 'right',
-          // },
-        },
       },
     });
-    // this.productGroupSalesChart = new Chart('productGroupSalesChart', {
-    //   type: 'line',
-    //   data: {
-    //     labels: [],
-    //     datasets: [
-    //       {
-    //         label: 'Sales in litres',
-    //         data: [],
-    //         backgroundColor: ['rgba(75, 192, 192, 0.2)'],
-    //         borderColor: ['rgba(54, 162, 235, 1)'],
-    //         fill: {
-    //           target: 'origin',
-    //         },
-    //         tension: 0.3,
-    //         pointStyle: 'rectRounded',
-    //         pointRadius: 8,
-    //         borderWidth: 1,
-    //       },
-    //     ],
-    //   },
-    //   options: {
-    //     responsive: true,
-    //     aspectRatio: 2,
-    //     scales: {
-    //       x: {
-    //         ticks: {
-    //           font: {
-    //             size: 12,
-    //             family:
-    //               "'Tinos', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
-    //           },
-    //           color: 'black',
-    //         },
-    //       },
-    //     },
-    //   },
-    // });
   }
 }

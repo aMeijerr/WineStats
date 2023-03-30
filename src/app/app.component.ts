@@ -22,8 +22,7 @@ export class AppComponent implements OnInit {
   //Setup form
   form!: FormGroup;
 
-  categoryControl = new FormControl('');
-
+  //Define toggle value in navbar, to show specific chart
   selectedToggleValue = 'sales';
 
   //Define current selected option in dropdown
@@ -42,11 +41,7 @@ export class AppComponent implements OnInit {
   minYear: number = 2009;
   maxYear: number = 2021;
 
-  checkSelectedYears() {
-    console.log(this.minYear);
-    console.log(this.maxYear);
-  }
-
+  //Define chart regions depending on selected country
   onCountrySelect() {
     const country = this.currentCountry;
     if (country) {
@@ -56,6 +51,7 @@ export class AppComponent implements OnInit {
     }
   }
 
+  //Patch value to form when toggle value is changed
   changeToggleValue(value: string) {
     this.selectedToggleValue = value;
     this.form.patchValue({ country: '', region: '', category: '' });
@@ -72,6 +68,7 @@ export class AppComponent implements OnInit {
       maxYear: [this.maxYear],
     });
 
+    //Reset region and category when country is changed
     this.form.get('country')?.valueChanges.subscribe(() => {
       this.form.get('region')?.setValue('');
       this.form.get('category')?.setValue('');
@@ -79,14 +76,7 @@ export class AppComponent implements OnInit {
       this.form.get('maxYear')?.setValue(this.maxYear);
     });
 
-    this.categoryControl.valueChanges.subscribe(
-      (selectedCategories: string | null) => {
-        this.form.get('category')?.setValue(selectedCategories);
-      }
-    );
-
-    //Add deBounceTime to prevent multiple requests
-
+    //Get chart data from api service
     this.salesChartData$ = this.form.valueChanges.pipe(
       debounceTime(0),
       switchMap(({ country, minYear, maxYear, region, category }) => {

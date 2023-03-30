@@ -15,4 +15,12 @@ hr {
     .extra_chart {
         display: none;
     }
+    .producer_chart-container {
+        width: 70%;
+        border: 1px solid #ccc;
+        border-radius: 0.5rem;
+        box-shadow: rgba(17, 12, 46, 0.15) 0px 18px 60px 0px;
+        padding: 30px;
+        margin: 20px;
+    }
 }

@@ -5,6 +5,7 @@
 <div class="wrapper">
   <app-navbar (toggleChartType)="changeToggleValue($event)"></app-navbar>
 
+  <!-- Dropdown menu for selecting country, region and category  -->
   <section class="select-forms">
     <form [formGroup]="form">
       <mat-form-field *ngIf="selectedToggleValue != 'countries'">
@@ -48,6 +49,8 @@
           </mat-select>
         </mat-form-field>
       </div>
+
+      <!-- Year slider for selecting time span -->
       <p>Select year span:</p>
       <mat-slider min="2009" max="2021" step="1" showTickMarks discrete>
         <input
@@ -62,36 +65,38 @@
         />
       </mat-slider>
     </form>
+
     <div class="site-icon">
       <img src="../favicon.ico" width="70" height="80" />
     </div>
   </section>
 
+  <!-- Chart containers -->
   <div class="outbox">
     <div class="container" *ngIf="selectedToggleValue === 'sales'">
       <h2>Total sales</h2>
       <app-charts [salesChartData]="salesChartData$ | async"></app-charts>
     </div>
     <div class="container" *ngIf="selectedToggleValue === 'producers'">
-      <h2>Top 10 producers</h2>
+      <h2>Top 10 Producers</h2>
       <app-producer-chart
         [topProducerListData]="topProducerListData$ | async"
       ></app-producer-chart>
     </div>
     <div class="container" *ngIf="selectedToggleValue === 'products'">
-      <h2>Top 10 products</h2>
+      <h2>Top 10 Products</h2>
       <app-product-chart
         [topProductListData]="topProductListData$ | async"
       ></app-product-chart>
     </div>
     <div class="container" *ngIf="selectedToggleValue === 'categories'">
-      <h2>Top 10 categories</h2>
+      <h2>Top 10 Categories</h2>
       <app-category-chart
         [topCategoryListData]="topCategoryListData$ | async"
       ></app-category-chart>
     </div>
     <div class="container" *ngIf="selectedToggleValue === 'countries'">
-      <h2>Top 10 countries</h2>
+      <h2>Top 10 Countries</h2>
       <app-country-chart
         [topCountryListData]="topCountryListData$ | async"
       ></app-country-chart>
