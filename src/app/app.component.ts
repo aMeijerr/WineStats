@@ -1,8 +1,8 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
-import { debounceTime, Observable, switchMap, tap } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { debounceTime, Observable, switchMap } from 'rxjs';
 import { ApiService } from './services/api.service';
 import { IChartData } from './services/api.service';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import countries from './services/countries.json';
 
 export interface IChartInputData {
