@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
   //Setup form
   form!: FormGroup;
 
-  //Define toggle value in navbar, to show specific chart
+  //Define toggle value in navbar, to show specific chart, default as sales to make it selected from start
   selectedToggleValue = 'sales';
 
   //Define current selected option in dropdown
