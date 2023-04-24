@@ -4,6 +4,7 @@ import { ApiService } from './services/api.service';
 import { IChartData } from './services/api.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import countries from './services/countries.json';
+import { Gtag } from 'angular-gtag';
 
 export interface IChartInputData {
   country?: string;
@@ -57,7 +58,9 @@ export class AppComponent implements OnInit {
     this.form.patchValue({ country: '', region: '', category: '' });
   }
 
-  constructor(private apiService: ApiService, private fb: FormBuilder) {}
+  constructor(private apiService: ApiService, private fb: FormBuilder, private gtag: Gtag) {
+    this.gtag.pageview();
+  }
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -89,6 +92,7 @@ export class AppComponent implements OnInit {
         );
       })
     );
+
     this.topProducerListData$ = this.form.valueChanges.pipe(
       debounceTime(0),
       switchMap(({ country, minYear, maxYear, region, category }) => {
@@ -101,6 +105,7 @@ export class AppComponent implements OnInit {
         );
       })
     );
+
     this.topProductListData$ = this.form.valueChanges.pipe(
       debounceTime(0),
       switchMap(({ country, minYear, maxYear, region, category }) => {
@@ -113,6 +118,7 @@ export class AppComponent implements OnInit {
         );
       })
     );
+
     this.topCountryListData$ = this.form.valueChanges.pipe(
       debounceTime(0),
       switchMap(({ country, minYear, maxYear, region, category }) => {
@@ -125,6 +131,7 @@ export class AppComponent implements OnInit {
         );
       })
     );
+
     this.topCategoryListData$ = this.form.valueChanges.pipe(
       debounceTime(0),
       switchMap(({ country, minYear, maxYear, region, category }) => {

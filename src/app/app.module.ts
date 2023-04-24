@@ -19,6 +19,7 @@ import { ProducerChartComponent } from './charts/producer-chart/producer-chart.c
 import { ProductChartComponent } from './charts/product-chart/product-chart.component';
 import { CountryChartComponent } from './charts/country-chart/country-chart.component';
 import { CategoryChartComponent } from './charts/category-chart/category-chart.component';
+import { GtagModule } from 'angular-gtag';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { CategoryChartComponent } from './charts/category-chart/category-chart.c
     MatSliderModule,
     MatTabsModule,
     MatProgressBarModule,
+    GtagModule.forRoot({ trackingId: 'G-EX6169FJBT' }),
   ],
   providers: [ApiService],
   bootstrap: [AppComponent],
