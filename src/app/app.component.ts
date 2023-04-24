@@ -4,7 +4,7 @@ import { ApiService } from './services/api.service';
 import { IChartData } from './services/api.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import countries from './services/countries.json';
-import { Gtag } from 'angular-gtag';
+import { Gtag, GtagPageview } from 'angular-gtag';
 
 export interface IChartInputData {
   country?: string;
@@ -42,6 +42,7 @@ export class AppComponent implements OnInit {
   minYear: number = 2009;
   maxYear: number = 2021;
 
+
   //Define chart regions depending on selected country
   onCountrySelect() {
     const country = this.currentCountry;
@@ -58,9 +59,7 @@ export class AppComponent implements OnInit {
     this.form.patchValue({ country: '', region: '', category: '' });
   }
 
-  constructor(private apiService: ApiService, private fb: FormBuilder, private gtag: Gtag) {
-    this.gtag.pageview();
-  }
+  constructor(private apiService: ApiService, private fb: FormBuilder) {}
 
   ngOnInit() {
     this.form = this.fb.group({
