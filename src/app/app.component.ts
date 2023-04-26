@@ -4,7 +4,6 @@ import { ApiService } from './services/api.service';
 import { IChartData } from './services/api.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import countries from './services/countries.json';
-import { Gtag, GtagPageview } from 'angular-gtag';
 
 export interface IChartInputData {
   country?: string;
