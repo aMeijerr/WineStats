@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
+
 import { Chart } from 'chart.js/auto';
 import { IChartData } from 'src/app/services/api.service';
 
@@ -66,7 +67,7 @@ export class SalesChartComponent implements OnInit, OnChanges {
       },
       options: {
         responsive: true,
-        aspectRatio: 2,
+        maintainAspectRatio: false,
         scales: {
           x: {
             ticks: {
