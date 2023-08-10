@@ -107,7 +107,7 @@ export class CountryChartComponent implements OnInit, OnChanges {
       },
       options: {
         responsive: true,
-        maintainAspectRatio: false,
+        aspectRatio: 2,
         indexAxis: 'y',
         elements: {
           bar: {
